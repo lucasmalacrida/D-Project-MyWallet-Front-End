@@ -21,7 +21,7 @@ export default function SignUpPage() {
     const body = { name, email, password };
     axios.post(`${baseUrl}/cadastro`, body)
       .then(res => { alert("Sucesso! Conta Cadastrada!"); navigate('/') })
-      .catch(err => alert(err.response.request.responseText))
+      .catch(err => alert(err.response.request.responseText));
   }
 
   return (
@@ -68,4 +68,4 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
