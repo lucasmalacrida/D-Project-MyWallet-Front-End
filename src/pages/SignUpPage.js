@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MyWalletLogo from "../components/MyWalletLogo";
 
+const baseUrl = process.env.REACT_APP_DATABASE_URL;
+
 export default function SignUpPage() {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({ name: "", email: "", password: "", confirmPassword: "" });
@@ -17,7 +19,7 @@ export default function SignUpPage() {
     // Requisição
     const { name, email, password } = { ...formFields };
     const body = { name, email, password };
-    axios.post("http://localhost:5000/cadastro", body)
+    axios.post(`${baseUrl}/cadastro`, body)
       .then(res => { alert("Sucesso! Conta Cadastrada!"); navigate('/') })
       .catch(err => alert(err.response.request.responseText))
   }
