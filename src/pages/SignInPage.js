@@ -12,17 +12,21 @@ export default function SignInPage() {
   const [formFields, setFormFields] = useState({ email: "", password: "" });
 
   function handleSignIn() {
-    // // Pré-Validações
-    if ( !formFields.email || !formFields.password ) { return alert("Todos os campos são obrigatórios!"); }
+    // Pré-Validações
+    if (!formFields.email || !formFields.password) { return alert("Todos os campos são obrigatórios!"); }
 
     // Requisição
     const { email, password } = { ...formFields };
     const body = { email, password };
     axios.post(`${baseUrl}/`, body)
-      .then(res => { alert("Sucesso! Login Realizado!"); localStorage.setItem("token", res.data.token); ; navigate('/home') })
+      .then(res => {
+        alert("Sucesso! Login Realizado!");
+        localStorage.setItem('userData', JSON.stringify(res.data));
+        navigate('/home');
+      })
       .catch(err => alert(err.response.request.responseText));
   }
-  
+
   return (
     <SingInContainer>
       <form onSubmit={e => { e.preventDefault(); handleSignIn(); }}>
