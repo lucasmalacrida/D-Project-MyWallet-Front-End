@@ -22,14 +22,28 @@ export default function HomePage() {
       .then(res => {
         setHomeData(res.data);
       })
-      .catch(err => alert(err.response.request.responseText));
+      .catch(err => {
+        if (err.response.status === 401) { navigate('/') };
+        alert(err.response.request.responseText);
+      });
   }, [])
+
+  function handleLogOut() {
+    // Requisição
+    axios.delete(`${baseUrl}/`, config)
+      .then(res => {
+        alert("LogOut Realizado!");
+        localStorage.setItem('userData', JSON.stringify({name: '', token: ''}));
+        navigate('/');
+      })
+      .catch(err => alert(err.response.request.responseText));
+  }
 
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, {homeData.name}</h1>
-        <BiExit />
+        <BiExit onClick={() => handleLogOut()} />
       </Header>
 
       <TransactionsContainer>
@@ -100,6 +114,7 @@ const TransactionsContainer = styled.article`
   flex-direction: column;
   justify-content: space-between;
   article {
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;   
     strong {

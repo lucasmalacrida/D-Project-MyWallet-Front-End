@@ -20,7 +20,7 @@ export default function SignInPage() {
     const body = { email, password };
     axios.post(`${baseUrl}/`, body)
       .then(res => {
-        alert("Sucesso! Login Realizado!");
+        alert("LogIn Realizado!");
         localStorage.setItem('userData', JSON.stringify(res.data));
         navigate('/home');
       })

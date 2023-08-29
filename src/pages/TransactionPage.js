@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -17,6 +17,15 @@ export default function TransactionsPage() {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({ amount: "", name: "" });
 
+  useEffect(() => {
+    axios.get(`${baseUrl}/home`, config)
+      .then(res => {})
+      .catch(err => {
+        if (err.response.status === 401) { navigate('/') };
+        alert(err.response.request.responseText);
+      });
+  }, [])
+
   function handleNewTransaction() {
     // Pré-Validações
     if (!formFields.amount || !formFields.name) { return alert("Todos os campos são obrigatórios!"); }
@@ -28,7 +37,7 @@ export default function TransactionsPage() {
     };
     axios.post(`${baseUrl}/nova-transacao/${tipo}`, body, config)
       .then(res => {
-        alert("Sucesso! Transação Realizada!");
+        alert("Transação Realizada!");
         navigate('/home');
       })
       .catch(err => alert(err.response.request.responseText));
