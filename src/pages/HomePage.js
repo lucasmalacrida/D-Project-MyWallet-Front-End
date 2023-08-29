@@ -146,4 +146,12 @@ const ListItemContainer = styled.li`
 `;
 const Transactions = styled.ul`
   overflow-y: scroll;
+  @media (max-width: 480px) {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
