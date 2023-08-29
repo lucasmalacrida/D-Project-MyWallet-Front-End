@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom"
-import styled from "styled-components"
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 const baseUrl = process.env.REACT_APP_DATABASE_URL;
 
@@ -69,4 +69,4 @@ const TransactionsContainer = styled.main`
     align-self: flex-start;
     margin-bottom: 40px;
   }
-`
+`;
