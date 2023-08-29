@@ -33,7 +33,7 @@ export default function HomePage() {
       </Header>
 
       <TransactionsContainer>
-        <ul>
+        <Transactions>
           {
             homeData.registries.length !== 0 ?
               homeData.registries.map((t, i) =>
@@ -49,7 +49,7 @@ export default function HomePage() {
               )
               : <></>
           }
-        </ul>
+        </Transactions>
 
         <article>
           <strong>Saldo</strong>
@@ -90,6 +90,7 @@ const Header = styled.header`
   color: white;
 `;
 const TransactionsContainer = styled.article`
+  height: 0;
   flex-grow: 1;
   background-color: #fff;
   color: #000;
@@ -142,4 +143,7 @@ const ListItemContainer = styled.li`
     color: #c6c6c6;
     margin-right: 10px;
   }
+`;
+const Transactions = styled.ul`
+  overflow-y: scroll;
 `;

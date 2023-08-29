@@ -6,6 +6,12 @@ import styled from "styled-components";
 
 const baseUrl = process.env.REACT_APP_DATABASE_URL;
 
+const config = {
+  headers: {
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
+  }
+};
+
 export default function TransactionsPage() {
   const { tipo } = useParams();
   const navigate = useNavigate();
@@ -19,11 +25,6 @@ export default function TransactionsPage() {
     const body = {
       amount: Number(formFields.amount),
       name: formFields.name
-    };
-    const config = {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
-      }
     };
     axios.post(`${baseUrl}/nova-transacao/${tipo}`, body, config)
       .then(res => {
