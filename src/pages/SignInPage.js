@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MyWalletLogo from "../components/MyWalletLogo";
 
-const baseUrl = process.env.REACT_APP_DATABASE_URL;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function SignInPage() {
   const navigate = useNavigate();

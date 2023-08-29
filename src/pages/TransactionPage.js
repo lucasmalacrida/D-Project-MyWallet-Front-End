@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const baseUrl = process.env.REACT_APP_DATABASE_URL;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function TransactionsPage() {
   const { tipo } = useParams();

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { BiExit } from "react-icons/bi";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
-const baseUrl = process.env.REACT_APP_DATABASE_URL;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function HomePage() {
   const navigate = useNavigate();
