@@ -32,18 +32,20 @@ export default function SignInPage() {
       <form onSubmit={e => { e.preventDefault(); handleSignIn(); }}>
         <MyWalletLogo />
         <input
+          data-test="email"
           placeholder="E-mail"
           type="email"
           value={formFields.email}
           onChange={e => setFormFields({ ...formFields, email: e.target.value })}
         />
         <input
+          data-test="password"
           placeholder="Senha"
           type="password"
           value={formFields.password}
           onChange={e => setFormFields({ ...formFields, password: e.target.value })}
         />
-        <button type="submit">Entrar</button>
+        <button data-test="sign-in-submit" type="submit">Entrar</button>
       </form>
 
       <Link to="/cadastro">

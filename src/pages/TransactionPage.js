@@ -6,23 +6,22 @@ import styled from "styled-components";
 
 const baseUrl = process.env.REACT_APP_DATABASE_URL;
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
-  }
-};
-
 export default function TransactionsPage() {
   const { tipo } = useParams();
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({ amount: "", name: "" });
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
+    }
+  };
+
   useEffect(() => {
     axios.get(`${baseUrl}/home`, config)
-      .then(res => {})
+      .then(res => { })
       .catch(err => {
         if (err.response.status === 401) { navigate('/') };
-        alert(err.response.request.responseText);
       });
   }, [])
 
@@ -48,6 +47,7 @@ export default function TransactionsPage() {
       <h1>Nova {tipo}</h1>
       <form onSubmit={e => { e.preventDefault(); handleNewTransaction(); }}>
         <input
+          data-test="registry-amount-input"
           placeholder="Valor"
           type="number"
           value={formFields.amount}
@@ -57,12 +57,13 @@ export default function TransactionsPage() {
           }}
         />
         <input
+          data-test="registry-name-input"
           placeholder="Descrição"
           type="text"
           value={formFields.name}
           onChange={e => setFormFields({ ...formFields, name: e.target.value })}
         />
-        <button type="submit">Salvar {tipo}</button>
+        <button data-test="registry-save" type="submit">Salvar {tipo}</button>
       </form>
     </TransactionsContainer>
   )

@@ -14,6 +14,7 @@ export default function App() {
           <Route path="/cadastro" element={<SignUpPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
+          <Route path="*" element={<><h1>404 Page not found</h1></>} />
         </Routes>
       </BrowserRouter>
     </PagesContainer>

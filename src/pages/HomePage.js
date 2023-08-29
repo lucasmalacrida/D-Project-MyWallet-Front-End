@@ -7,15 +7,15 @@ import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 const baseUrl = process.env.REACT_APP_DATABASE_URL;
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
-  }
-};
-
 export default function HomePage() {
   const navigate = useNavigate();
   const [homeData, setHomeData] = useState({ name: '', registries: [], cash: '' });
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`
+    }
+  };
 
   useEffect(() => {
     axios.get(`${baseUrl}/home`, config)
@@ -24,7 +24,6 @@ export default function HomePage() {
       })
       .catch(err => {
         if (err.response.status === 401) { navigate('/') };
-        alert(err.response.request.responseText);
       });
   }, [])
 
@@ -42,8 +41,8 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {homeData.name}</h1>
-        <BiExit onClick={() => handleLogOut()} />
+        <h1>Olá, <span data-test="user-name">{homeData.name}</span></h1>
+        <BiExit data-test="logout" onClick={() => handleLogOut()} />
       </Header>
 
       <TransactionsContainer>
@@ -54,9 +53,9 @@ export default function HomePage() {
                 <ListItemContainer key={i}>
                   <div>
                     <span>{t.date}</span>
-                    <strong>{t.name}</strong>
+                    <strong data-test="registry-name">{t.name}</strong>
                   </div>
-                  <Value color={t.type === "entrada" ? "positivo" : t.type === "saida" ? "negativo" : ""}>
+                  <Value data-test="registry-amount" color={t.type === "entrada" ? "positivo" : t.type === "saida" ? "negativo" : ""}>
                     {t.amount}
                   </Value>
                 </ListItemContainer>
@@ -75,11 +74,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button onClick={() => navigate("/nova-transacao/entrada")}>
+        <button data-test="new-income" onClick={() => navigate("/nova-transacao/entrada")}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={() => navigate("/nova-transacao/saida")}>
+        <button data-test="new-expense" onClick={() => navigate("/nova-transacao/saida")}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
