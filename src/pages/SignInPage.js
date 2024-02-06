@@ -12,10 +12,8 @@ export default function SignInPage() {
   const [formFields, setFormFields] = useState({ email: "", password: "" });
 
   function handleSignIn() {
-    // Pré-Validações
     if (!formFields.email || !formFields.password) { return alert("Todos os campos são obrigatórios!"); }
 
-    // Requisição
     const { email, password } = { ...formFields };
     const body = { email, password };
     axios.post(`${baseUrl}/`, body)

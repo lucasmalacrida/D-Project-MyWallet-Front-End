@@ -28,7 +28,6 @@ export default function HomePage() {
   }, [])
 
   function handleLogOut() {
-    // Requisição
     axios.delete(`${baseUrl}/`, config)
       .then(res => {
         alert("LogOut Realizado!");

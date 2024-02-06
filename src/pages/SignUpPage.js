@@ -12,11 +12,9 @@ export default function SignUpPage() {
   const [formFields, setFormFields] = useState({ name: "", email: "", password: "", confirmPassword: "" });
 
   function handleSignUp() {
-    // Pré-Validações
     if (!formFields.name || !formFields.email || !formFields.password || !formFields.confirmPassword) { return alert("Todos os campos são obrigatórios!"); }
     if (formFields.confirmPassword !== formFields.password) { return alert("As senhas digitadas não coincidem!"); }
 
-    // Requisição
     const { name, email, password } = { ...formFields };
     const body = { name, email, password };
     axios.post(`${baseUrl}/cadastro`, body)

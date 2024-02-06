@@ -26,10 +26,8 @@ export default function TransactionsPage() {
   }, [])
 
   function handleNewTransaction() {
-    // Pré-Validações
     if (!formFields.amount || !formFields.name) { return alert("Todos os campos são obrigatórios!"); }
 
-    // Requisição
     const body = {
       amount: Number(formFields.amount),
       name: formFields.name
